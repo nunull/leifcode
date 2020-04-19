@@ -1,0 +1,5 @@
+- timing ist nicht richtig
+- mehrere patterns auf einem channel
+- parameter statt noten kontrollieren
+- schicke sprache
+- atom plugin

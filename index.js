@@ -4,30 +4,38 @@ const util = require('util')
 const client = new Client('127.0.0.1', 3333)
 const send = util.promisify(client.send.bind(client))
 
-sendPattern([0, 2, [3, 7]])
-// /pattern/set 1 0.33 0
-// /pattern/set 2 0.33 1
-// /pattern/set 3 0.165 2
-// /pattern/set 4 0.165 3
+async function sendOsc (path, message) {
+  console.log(path, message)
+  await send(path, message)
+}
 
-async function sendPattern (pattern) {
-  await send('/pattern/clear', 'bang')
-  await sendItems(pattern)
-  await send('/pattern/dump', 'bang')
+main()
 
+async function main () {
+  await sendPattern(0, [0, 2, [3, 7], 12])
+  await sendPattern(1, [0, [[7, 7, 8, 14, [15, 19]], 0, 2, 3, 5], 12])
+  await sendPattern(2, [0, [0, 2], 0, [6, 3]])
   client.close()
 }
 
-async function sendItems (pattern, offset = 0, lengthFactor = 1) {
+async function sendPattern (channel, pattern) {
+  await sendOsc(`/pattern/${channel}/clear`, 'bang')
+  await sendItems(channel, pattern)
+  await sendOsc(`/pattern/${channel}/dump`, 'bang')
+}
+
+async function sendItems (channel, pattern, offset = 0, lengthFactor = 1) {
+  let index = offset
   for (let i = 0; i < pattern.length; i++) {
-    const index = i + offset + 1
     const length = 1 / pattern.length * lengthFactor
     const value = pattern[i]
 
     if (Array.isArray(value)) {
-      await sendItems(value, i, 1 / pattern.length)
+      await sendItems(channel, value, index, 1 / pattern.length)
+      index += value.length
     } else {
-      await send('/pattern/set', [index, length, value + 36])
+      await sendOsc(`/pattern/${channel}/set`, [index + 1, length, value + 36])
+      index++
     }
   }
 }
