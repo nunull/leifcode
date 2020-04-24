@@ -58,7 +58,9 @@ export default {
 
 async function sendPattern (channel, pattern) {
   await sendOsc(`/pattern/${channel}/clear`, 'bang')
-  await sendItems(channel, pattern)
+  if(pattern != 0){                                 //"hush" könnte man sagen
+    await sendItems(channel, pattern)
+    }
   await sendOsc(`/pattern/${channel}/dump`, 'bang')
 }
 

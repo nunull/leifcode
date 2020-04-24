@@ -1,5 +1,15 @@
 
+//return patterns with length equal to 1 measure
 p(0, [0, 2, [3, 7], 12])
 
+p(0, [[0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, [3, 7], 12])
 
+p(0, [0, 2, [3, 4, 5, 6, 7], 12])
+
+p(0, [0, 2, 2, [3, 7], 12])
+
+//returns pattern with length longer than 1 measure - broken ?
 p(0, [0, 2, [[3, 7], 5], 12])
+
+//clears the pattern
+p(0, 0)
