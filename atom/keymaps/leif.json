@@ -1,0 +1,6 @@
+{
+  "atom-workspace atom-text-editor[data-grammar~='leif']": {
+    "cmd-enter": "leif:eval",
+    "ctrl-enter": "leif:eval"
+  }
+}

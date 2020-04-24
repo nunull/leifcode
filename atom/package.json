@@ -1,0 +1,16 @@
+{
+  "name": "atom-leif",
+  "main": "./lib/leif",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "activationCommands": {
+    "atom-workspace": "leif:eval"
+  },
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "node-osc": "^4.1.8"
+  }
+}

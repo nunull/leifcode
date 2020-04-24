@@ -1,0 +1,29 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+atom-text-editor.editor .line {
+  transition:  background-color .2s ease-out;
+  -webkit-transition: background-color .2s ease-out;
+
+  &.eval-flash {
+    color: @text-color-selected;
+    background-color: @background-color-selected;
+    transition: none;
+    -webkit-transition: none;
+
+  }
+
+  &.eval-success {
+    color: @text-color-success;
+    background-color: fadeout(@background-color-success, 50%);
+  }
+
+  &.eval-error,
+  &.eval-syntax-error {
+    color: @text-color-error;
+    background-color: @background-color-error;
+  }
+}
