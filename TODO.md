@@ -1,5 +1,6 @@
 - timing ist nicht richtig
+  - neue patterns werden direkt eingesetzt, sind demnach im takt verschoben 
 - mehrere patterns auf einem channel
 - parameter statt noten kontrollieren
 - schicke sprache
-- atom plugin
+- atom plugin (läuft soweit!)
