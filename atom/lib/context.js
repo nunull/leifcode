@@ -21,3 +21,9 @@ export function rev (rawPattern) {
   pattern.items = pattern.items.reverse()
   return pattern
 }
+
+export function hush () {
+  for (let i = 0; i < 10; i++) {
+    sendPattern(i, [])
+  }
+}
