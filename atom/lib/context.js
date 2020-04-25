@@ -16,6 +16,14 @@ export function plus (value, rawPattern) {
   return pattern
 }
 
+export function slow (factor, rawPattern) {
+  const pattern = fromString(rawPattern)
+  for (const item of pattern.items) {
+    item.length *= factor
+  }
+  return pattern
+}
+
 export function rev (rawPattern) {
   const pattern = fromString(rawPattern)
   pattern.items = pattern.items.reverse()
