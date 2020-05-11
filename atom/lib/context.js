@@ -46,7 +46,7 @@ export function rev (rawPattern) {
 
 export function hush () {
   for (let i = 0; i < 10; i++) {
-    sendPattern(i, []).catch(err => {
+    sendPattern(i, { type:"pattern", items: []}).catch(err => {
       console.log('error sending pattern', err)
     })
   }

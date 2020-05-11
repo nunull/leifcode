@@ -5,18 +5,17 @@ import { Client } from 'node-osc'
 const client = new Client('127.0.0.1', 3333)
 
 export async function sendPattern (channel, pattern) {
-  await sendOsc(`/pattern/${channel}/clear`, 'bang')
-  await sendItems(channel, pattern.items)
-  await sendOsc(`/pattern/${channel}/dump`, 'bang')
+  await sendOsc(`/pattern/${channel}/values`, JSON.stringify(pattern.items.map(item => item.value)))
+  await sendOsc(`/pattern/${channel}/lengths`, JSON.stringify(pattern.items.map(item => item.length)))
 }
 
-async function sendItems (channel, items, index = 1) {
-  for (const item of items) {
-    await sendOsc(`/pattern/${channel}/set`, [index, item.length, item.value])
-    index++
-  }
-  return index
-}
+// async function sendItems (channel, items, index = 1) {
+//   for (const item of items) {
+//     await sendOsc(`/pattern/${channel}/set`, [index, item.length, item.value])
+//     index++
+//   }
+//   return index
+// }
 
 async function sendOsc (path, message) {
   console.log('sending osc message', path, message)
