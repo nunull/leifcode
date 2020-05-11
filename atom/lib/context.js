@@ -30,13 +30,33 @@ export function plus (p1, p2) {
   return { type: 'pattern', items: newItems }
 }
 
-export function slow (factor, rawPattern) {
-  const pattern = fromString(rawPattern)
-  for (const item of pattern.items) {
-    item.length *= factor
+export function slow (p1, p2) {
+  p1 = fromString(p1)
+  p2 = fromString(p2)
+
+  const newItems = []
+
+  for (let n = 0; n < p1.items.length; n++) {
+    for (let m = 0; m < p2.items.length; m++) {
+      newItems.push({
+        type: 'value',
+        value: p2.items[m].value,
+        length: p1.items[n].value * p2.items[m].length
+      })
+    }
   }
-  return pattern
+
+  return { type: 'pattern', items: newItems }
 }
+
+
+// export function slow (factor, rawPattern) {
+//   const pattern = fromString(rawPattern)
+//   for (const item of pattern.items) {
+//     item.length *= factor
+//   }
+//   return pattern
+// }
 
 export function rev (rawPattern) {
   const pattern = fromString(rawPattern)
