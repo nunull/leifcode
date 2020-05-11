@@ -11,12 +11,23 @@ export function p (channel, rawPattern) {
   })
 }
 
-export function plus (value, rawPattern) {
-  const pattern = fromString(rawPattern)
-  for (const item of pattern.items) {
-    item.value += value
+export function plus (p1, p2) {
+  p1 = fromString(p1)
+  p2 = fromString(p2)
+
+  const newItems = []
+
+  for (let n = 0; n < p1.items.length; n++) {
+    for (let m = 0; m < p2.items.length; m++) {
+      newItems.push({
+        type: 'value',
+        length: p2.items[m].length,
+        value: p1.items[n].value + p2.items[m].value
+      })
+    }
   }
-  return pattern
+
+  return { type: 'pattern', items: newItems }
 }
 
 export function slow (factor, rawPattern) {

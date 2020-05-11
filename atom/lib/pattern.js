@@ -11,7 +11,6 @@ export function fromString (raw) {
   const values = parse(tokens)
   const pattern = getTimings(values)
   const pattern2 = calculateCycles(pattern)
-  console.log('pattern2', pattern2)
   return pattern2
 }
 
@@ -123,16 +122,16 @@ function getTimings (pattern, index = 0, lengthFactor = 1) {
 }
 
 function calculateCycles (pattern) {
-  console.log('pattern', pattern)
-
   const newItems = []
   const cycleLengths = pattern.items
     .filter(item => item.type === 'cycle')
     .map(item => item.value.length)
-  const newItemsLength = (cycleLengths.length === 1 ? cycleLengths[0] : lcm(cycleLengths)) * pattern.items.length
-  console.log('cycleLengths', cycleLengths)
-  console.log('pattern.items.length', pattern.items.length)
-  console.log('newItemsLength', newItemsLength)
+  const cycleLength = cycleLengths.length === 0
+    ? 1
+    : cycleLengths.length === 1
+    ? cycleLengths[0]
+    : lcm(cycleLengths)
+  const newItemsLength = cycleLength * pattern.items.length
 
   for (let i = 0; i < newItemsLength; i++) {
     const item = pattern.items[i % pattern.items.length]
