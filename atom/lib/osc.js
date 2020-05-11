@@ -1,5 +1,9 @@
 'use babel';
 
+import { Client } from 'node-osc'
+
+const client = new Client('127.0.0.1', 3333)
+
 export async function sendPattern (channel, pattern) {
   await sendOsc(`/pattern/${channel}/clear`, 'bang')
   await sendItems(channel, pattern.items)

@@ -1,13 +1,13 @@
 'use babel';
 
 import * as vm from 'vm'
-import { Client } from 'node-osc'
+// import { Client } from 'node-osc'
 import { CompositeDisposable } from 'atom'
 import * as context from './context'
 
 export default {
   subscriptions: null,
-  client: null,
+  // client: null,
 
   activate (state) {
     console.log('activating leif')
@@ -17,13 +17,12 @@ export default {
       'leif:eval': () => this.eval()
     }))
 
-    client = new Client('127.0.0.1', 3333)
-
+    // client = new Client('127.0.0.1', 3333)
   },
 
   deactivate () {
     this.subscriptions.dispose()
-    this.client.close()
+    // this.client.close()
   },
 
   serialize () {},

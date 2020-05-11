@@ -4,8 +4,11 @@ import { sendPattern } from './osc'
 import { fromString } from './pattern'
 
 export function p (channel, rawPattern) {
+  console.log('p', channel, rawPattern)
   const pattern = fromString(rawPattern)
-  sendPattern(channel, pattern)
+  sendPattern(channel, pattern).catch(err => {
+    console.log('error sending pattern', err)
+  })
 }
 
 export function plus (value, rawPattern) {
@@ -32,6 +35,8 @@ export function rev (rawPattern) {
 
 export function hush () {
   for (let i = 0; i < 10; i++) {
-    sendPattern(i, [])
+    sendPattern(i, []).catch(err => {
+      console.log('error sending pattern', err)
+    })
   }
 }
